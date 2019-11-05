@@ -1,0 +1,7 @@
+open terminal
+cd kafka
+bin/zookeeper-server-start.sh config/zookeeper.properties
+open new tab terminal
+bin/kafka-server-start.sh config/server.properties
+depois de enviar uma mensagem pode ver com:
+bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic mytopic
