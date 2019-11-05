@@ -28,9 +28,21 @@ public class KafkaSimpleController {
         kafkaTemplate.send("mytopic", jsonConverter.toJson(simpleModel));
     }
 
-    @KafkaListener(topics = "mytopic")
+   @PostMapping("/v2")
+    public void post(@RequestBody TitleModel titleModel){
+        kafkaTemplate.send("xpto", jsonConverter.toJson(titleModel));
+    }
+
+
+   @KafkaListener(topics = "mytopic")
     public void getFromKafka(String simpleModel){
         SimpleModel simpleModelObject =  jsonConverter.fromJson(simpleModel, SimpleModel.class);
         System.out.println(simpleModel.toString());
+    }
+
+    @KafkaListener(topics = "xpto")
+    public void getFromKafkafka2(String titleModel){
+        TitleModel titleModel1 =  jsonConverter.fromJson(titleModel, TitleModel.class);
+        System.out.println(titleModel1.toString());
     }
 }
